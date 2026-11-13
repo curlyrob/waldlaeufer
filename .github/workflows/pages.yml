@@ -1,0 +1,100 @@
+# Baut die Website und die Wasserstellen-Kacheln und veröffentlicht beides auf GitHub Pages.
+# Läuft bei jeder Änderung an der Website, am ersten Montag im Monat (frische OSM-Daten) und auf Knopfdruck.
+# Bei einer reinen Website-Änderung werden die Kacheln der letzten Veröffentlichung übernommen.
+name: Website und Wasserstellen
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: "23 2 1-7 * 1"
+  workflow_dispatch:
+    inputs:
+      water:
+        description: "Wasserstellen neu aus OpenStreetMap bauen"
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    env:
+      UA: "waldlaeufer-data-build (+https://github.com/curlyrob/waldlaeufer)"
+      REBUILD: ${{ github.event_name == 'schedule' || inputs.water == true }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Werkzeuge installieren
+        run: |
+          sudo apt-get update -q && sudo apt-get install -y -q osmium-tool
+          pip install --quiet shapely
+
+      - name: Wasserstellen aus den Länderauszügen filtern
+        if: env.REBUILD == 'true'
+        run: |
+          mkdir -p polys
+          : > water.geojsonseq
+          for c in albania andorra austria belgium bosnia-herzegovina bulgaria croatia cyprus czech-republic \
+                   denmark estonia faroe-islands finland france germany great-britain greece guernsey-jersey \
+                   hungary iceland ireland-and-northern-ireland isle-of-man italy kosovo latvia liechtenstein \
+                   lithuania luxembourg macedonia malta monaco montenegro netherlands norway poland portugal \
+                   romania serbia slovakia slovenia spain sweden switzerland; do
+            echo "::group::$c"
+            curl -fsSL --retry 3 -A "$UA" -o "polys/$c.poly" "https://download.geofabrik.de/europe/$c.poly"
+            curl -fsSL --retry 3 -A "$UA" -o country.osm.pbf "https://download.geofabrik.de/europe/$c-latest.osm.pbf"
+            osmium tags-filter country.osm.pbf \
+              nwr/amenity=drinking_water,water_point,fountain nwr/man_made=water_tap,water_well \
+              nwr/natural=spring nwr/drinking_water=yes,treated -o water.osm.pbf --overwrite
+            osmium export water.osm.pbf -f geojsonseq -a type,id --geometry-types=point,linestring,polygon \
+              -o country.geojsonseq --overwrite
+            cat country.geojsonseq >> water.geojsonseq
+            rm -f country.osm.pbf water.osm.pbf country.geojsonseq
+            echo "::endgroup::"
+          done
+          ls -lh water.geojsonseq
+
+      - name: Website und Kacheln zusammenstellen
+        run: |
+          mkdir -p _site
+          cp *.html style.css icon.png _site/
+          if [ "$REBUILD" = "true" ]; then
+            python3 tools/build_water.py _site/data/water/v1 water.geojsonseq polys/*.poly
+          else
+            # Kacheln der letzten Veröffentlichung übernehmen (Liste in index.txt)
+            BASE=https://curlyrob.github.io/waldlaeufer/data/water/v1
+            mkdir -p _site/data/water/v1
+            if curl -fsS -o _site/data/water/v1/index.txt "$BASE/index.txt"; then
+              curl -fsS -o _site/data/water/v1/meta.json "$BASE/meta.json"
+              (cd _site/data/water/v1 && xargs -P 16 -I{} curl -fsS --retry 3 --create-dirs -o {} "$BASE/{}" < index.txt)
+            else
+              rmdir _site/data/water/v1
+            fi
+          fi
+          if [ -d _site/data/water/v1 ]; then
+            (cd _site/data/water/v1 && find . -name '*.json' ! -name meta.json | sed 's|^\./||' | sort > index.txt)
+          fi
+          du -sh _site/data 2>/dev/null || true
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

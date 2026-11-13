@@ -27,8 +27,9 @@
     <h2>Kurz gesagt</h2>
     <p><strong>Ich als Entwickler erhalte keinerlei Daten aus der App.</strong> Alles, was du einträgst, bleibt auf deinem iPhone.
       Es gibt kein Benutzerkonto, keinen eigenen Server, keine Werbung, kein Tracking und keine Analyse- oder Statistikdienste.</p>
-    <p>Nur zwei Funktionen schicken – ohne Bezug zu deiner Person – Standortangaben an Dritte: die Wetterprognose (an Open-Meteo,
-      auf ca. 1 km gerundet) und die Länderkennung für den Notruf (an Apple). Details stehen unten.</p>
+    <p>Nur wenige Funktionen schicken – ohne Bezug zu deiner Person – ungefähre Standortangaben an Dritte: Wetter und
+      Waldbrandgefahr (an Open-Meteo, auf ca. 1 km gerundet), die Wasserstellen in der Nähe (an GitHub, auf ca. 25 km genau,
+      außerhalb Europas an einen OpenStreetMap-Server) und die Länderkennung für den Notruf (an Apple). Details stehen unten.</p>
   </section>
 
   <section>
@@ -48,7 +49,8 @@
         übernommen werden können,</li>
       <li>deinen Lernstand bei Knoten, Übungszeiten und Quizergebnisse, Favoriten und Einstellungen,</li>
       <li>die zuletzt bekannte Position und das zuletzt erkannte Land, damit der Notruf-Bildschirm auch ohne GPS etwas anzeigt,</li>
-      <li>die zuletzt geladene Wetterprognose.</li>
+      <li>die zuletzt geladene Wetterprognose,</li>
+      <li>mit Pro: Tagebucheinträge zu deinen Touren mit Text, Foto, Ort und Wetter sowie die gespeicherten Wasserstellen einer Tour.</li>
     </ul>
     <p>Die Daten werden nicht an mich übertragen. Sie sind Teil deines normalen iPhone-Backups, das von Apple bzw. deinem Computer
       nach deinen eigenen Einstellungen verwaltet wird.</p>
@@ -66,7 +68,8 @@
     <h2>Zugriffsrechte</h2>
     <h3>Standort (beim Verwenden der App)</h3>
     <p>Der Standort wird nur genutzt, solange du die App verwendest, und zwar für: Koordinaten und Land auf dem Notruf-Bildschirm,
-      den Startpunkt und die letzte Position einer Tour, Sonnenauf- und -untergang, die Wetterprognose und geografisch Nord beim Kompass.
+      den Startpunkt und die letzte Position einer Tour, Sonnenauf- und -untergang, Wetter und Waldbrandgefahr, Wasserstellen in der
+      Nähe, den Ort eines Tagebucheintrags und geografisch Nord beim Kompass.
       Ohne Freigabe funktioniert die App weiter; diese Funktionen sind dann eingeschränkt.</p>
     <h3>Mitteilungen</h3>
     <p>Für die Rückmelde-Erinnerungen bei Touren und für Wartungstermine deiner Ausrüstung. Die Mitteilungen werden direkt auf
@@ -74,6 +77,8 @@
     <h3>Kontakte und Fotos</h3>
     <p>Die App hat <strong>keinen Zugriff</strong> auf dein Adressbuch oder deine Fotomediathek. Sie nutzt die Auswahlfenster von
       iOS: Nur der Kontakt bzw. das Foto, das du dort auswählst, wird in die App übernommen.</p>
+    <h3>Kamera</h3>
+    <p>Nur wenn du im Tagebuch „Foto aufnehmen“ wählst. Das Foto wird verkleinert im Tagebucheintrag gespeichert, nicht in deiner Fotomediathek.</p>
     <h3>Nachrichten</h3>
     <p>Tourenplan und Alarm-Nachricht werden als SMS vorbereitet. Du siehst den Text und schickst ihn selbst über die
       Nachrichten-App ab; der Inhalt (inkl. deiner Position und eines Apple-Karten-Links) geht dann an die Empfänger, die du ausgewählt hast.</p>
@@ -87,7 +92,17 @@
       die auf zwei Nachkommastellen (etwa 1 km) gerundeten Koordinaten übertragen sowie technisch notwendig deine IP-Adresse.
       Es werden keine Kennungen, kein Name und kein Konto übermittelt. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO (die von dir
       gewünschte Funktion). Es gelten die <a href="https://open-meteo.com/en/terms">Nutzungs- und Datenschutzbedingungen von Open-Meteo</a>.
-      Die Wetterdaten stehen unter der Lizenz CC BY 4.0.</p>
+      Die Wetterdaten stehen unter der Lizenz CC BY 4.0. Dieselben gerundeten Koordinaten werden für die Einschätzung der
+      Waldbrandgefahr in der Wetteransicht abgefragt.</p>
+    <h3>Wasserstellen: GitHub Pages und OpenStreetMap</h3>
+    <p>Für „Wasser in der Nähe“ lädt die App vorbereitete Kartenausschnitte von GitHub Pages (GitHub Inc., USA). Abgefragt wird
+      nur der Ausschnitt von etwa 28 × 17 km, in dem du dich befindest – nicht deine genaue Position. Technisch notwendig
+      verarbeitet GitHub dabei deine IP-Adresse. Es gelten die
+      <a href="https://docs.github.com/de/site-policy/privacy-policies/github-general-privacy-statement">Datenschutzbestimmungen von GitHub</a>.
+      Außerhalb des abgedeckten Gebiets (Europa) fragt die App stattdessen die Overpass-Server von OpenStreetMap
+      (overpass-api.de, Deutschland, ersatzweise overpass.private.coffee, Österreich) für einen Ausschnitt von etwa 20 × 20 km ab.
+      Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO. Die Daten stammen von den OpenStreetMap-Mitwirkenden und stehen unter der
+      Lizenz ODbL 1.0.</p>
     <h3>Länderkennung: Apple</h3>
     <p>Um das Land für die Notrufnummer zu erkennen, nutzt die App den Ortungsdienst von iOS (Reverse-Geocoding). Dabei wird die
       Position an Apple übertragen. Es gelten die <a href="https://www.apple.com/de/legal/privacy/">Datenschutzbestimmungen von Apple</a>.</p>
@@ -95,13 +110,17 @@
 
   <section>
     <h2>iCloud</h2>
-    <p>Derzeit gleicht die App keine Daten über iCloud ab. Ein optionaler Abgleich über deine private iCloud-Datenbank ist für eine
-      spätere Pro-Version geplant; die Daten lägen dann in deinem iCloud-Konto bei Apple, nicht bei mir. Diese Erklärung wird vorher angepasst.</p>
+    <p>Mit Waldläufer Pro kannst du den iCloud-Sync einschalten. Dann werden Packlisten, Ausrüstung, Touren, Tagebuch und Lernstand
+      über deine private iCloud-Datenbank zwischen deinen Geräten abgeglichen. Die Daten liegen in deinem iCloud-Konto bei Apple,
+      nicht bei mir; ich habe keinen Zugriff darauf. Der Notfallpass wird nie synchronisiert. Ohne Pro oder mit ausgeschaltetem
+      Sync bleibt alles nur auf deinem Gerät.</p>
+    <h3>Kauf von Waldläufer Pro</h3>
+    <p>Der Kauf läuft vollständig über den App Store von Apple. Ich erhalte dabei keine Zahlungs- oder Personendaten.</p>
   </section>
 
   <section>
     <h2>Löschen</h2>
-    <p>Du kannst Packlisten, Ausrüstung, Touren, Kontakte und den Notfallpass jederzeit in der App löschen. Beim Löschen der App
+    <p>Du kannst Packlisten, Ausrüstung, Touren, Tagebucheinträge, gespeicherte Wasserstellen, Kontakte und den Notfallpass jederzeit in der App löschen. Beim Löschen der App
       werden alle in der App gespeicherten Daten entfernt.</p>
   </section>
 
