@@ -25,8 +25,11 @@
 
   <section>
     <h2>Kurz gesagt</h2>
-    <p><strong>Ich als Entwickler erhalte keinerlei Daten aus der App.</strong> Alles, was du einträgst, bleibt auf deinem Gerät.
-      Es gibt kein Benutzerkonto, keinen eigenen Server, keine Werbung, kein Tracking und keine Analyse- oder Statistikdienste.</p>
+    <p>Alles, was du einträgst, bleibt auf deinem Gerät. Es gibt kein Benutzerkonto, keinen eigenen Server, keine Werbung,
+      kein Tracking und keine Analyse- oder Statistikdienste.</p>
+    <p>Ausnahme sind <strong>Community-Schlafplätze</strong>: Was du dort selbst teilst (Ort, Beschreibung, Foto, Bewertung, Spitzname),
+      wird in einer öffentlichen iCloud-Datenbank gespeichert, die Waldläufer und die App Bikepacking gemeinsam nutzen, und ist für
+      alle Nutzer beider Apps sichtbar.</p>
     <p>Nur wenige Funktionen schicken – ohne Bezug zu deiner Person – ungefähre Standortangaben an Dritte: Wetter und
       Waldbrandgefahr (an Open-Meteo, auf ca. 1 km gerundet), die Wasserstellen in der Nähe (an GitHub, auf ca. 25 km genau,
       außerhalb Europas an einen OpenStreetMap-Server) die Länderkennung für den Notruf (an Apple bzw. Google) und – nur unter Android – die Kartenausschnitte, die du dir ansiehst (an OpenStreetMap). Details stehen unten.</p>
@@ -56,6 +59,31 @@
       deinem Computer nach deinen eigenen Einstellungen verwaltet wird. Unter Android sind sie – außer dem Notfallpass und
       zwischengespeicherten Wasserstellen – Teil der Android-Sicherung in deinem Google-Konto, sofern du sie in den
       Systemeinstellungen eingeschaltet hast.</p>
+  </section>
+
+  <section>
+    <h2>Community-Schlafplätze</h2>
+    <p>Unter <em>Mehr › Community-Schlafplätze</em> (auch unter <em>Shelter</em>) kannst du Schlafplätze ansehen, eintragen und
+      bewerten. Waldläufer teilt sich diese Einträge mit der App <a href="https://curlyrob.github.io/bikepacking/">Bikepacking</a>
+      desselben Entwicklers.</p>
+    <h3>Ansehen</h3>
+    <p>Zum Anzeigen fragt die App die gemeinsame öffentliche CloudKit-Datenbank bei Apple ab – für den Umkreis deiner Position.
+      Dafür brauchst du kein Konto; Apple verarbeitet dabei technisch notwendig deine IP-Adresse und die abgefragten Orte.</p>
+    <h3>Eintragen und bewerten</h3>
+    <p>Wenn du einen Schlafplatz oder eine Bewertung teilst, werden gespeichert und für alle Nutzer beider Apps sichtbar: Lage, Art,
+      Name, Beschreibung, Ausstattung, optional ein Foto, Sterne und Text der Bewertung, der Spitzname, den du angibst, und das Datum.
+      Dafür musst du in iCloud angemeldet sein. CloudKit verknüpft jeden Beitrag mit einer anonymen Nutzerkennung, die nur für diese
+      gemeinsame Datenbank gilt – nicht mit deinem Namen, deiner Apple-ID oder E-Mail-Adresse. Diese Kennung erlaubt, dass nur du
+      deine Beiträge ändern oder löschen kannst (in beiden Apps) und dass andere dich blockieren können. Die Daten liegen bei Apple
+      (Rechtsgrundlage: Art. 6 Abs. 1 lit. a und b DSGVO); es gelten die
+      <a href="https://www.apple.com/de/legal/privacy/">Datenschutzbestimmungen von Apple</a>.</p>
+    <h3>Melden und blockieren</h3>
+    <p>Meldest du einen Beitrag, werden der betroffene Beitrag, der gewählte Grund und deine anonyme Nutzerkennung gespeichert, damit
+      ich den Beitrag prüfen kann. Gemeldete Beiträge und blockierte Nutzer merkt sich die App außerdem auf deinem Gerät, um sie
+      auszublenden. Beiträge, die gegen die Regeln verstoßen, lösche ich.</p>
+    <h3>Löschen</h3>
+    <p>Eigene Schlafplätze löschst du unter <em>Meine Einträge</em> (wischen) oder im Eintrag über „…“, eigene Bewertungen durch
+      Wischen. Auf Wunsch lösche ich auch alle deine Beiträge – schreib mir eine E-Mail.</p>
   </section>
 
   <section>
@@ -109,6 +137,11 @@
       (overpass-api.de, Deutschland, ersatzweise overpass.private.coffee, Österreich) für denselben Ausschnitt von etwa 28 × 17 km ab.
       Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO. Die Daten stammen von den OpenStreetMap-Mitwirkenden und stehen unter der
       Lizenz ODbL 1.0.</p>
+    <h3>Hütten und Campingplätze: GitHub Pages</h3>
+    <p>Für die Hütten und Campingplätze aus OpenStreetMap bei den Community-Schlafplätzen lädt die App vorbereitete Kartenausschnitte
+      der App Bikepacking von GitHub Pages (GitHub Inc., USA) – nur die Ausschnitte von etwa 28 × 17 km rund um den Kartenbereich, den
+      du ansiehst. Technisch notwendig verarbeitet GitHub dabei deine IP-Adresse. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO.
+      Die Daten stammen von den OpenStreetMap-Mitwirkenden (ODbL 1.0).</p>
     <h3>Ortung und Länderkennung: Apple bzw. Google</h3>
     <p>Um das Land für die Notrufnummer zu erkennen, nutzt die App den Ortungsdienst des Betriebssystems (Reverse-Geocoding).
       Auf dem iPhone wird die Position dabei an Apple übertragen, es gelten die
@@ -140,14 +173,16 @@
 
   <section>
     <h2>Löschen</h2>
-    <p>Du kannst Packlisten, Ausrüstung, Touren, Tagebucheinträge, gespeicherte Wasserstellen, Kontakte und den Notfallpass jederzeit in der App löschen. Beim Löschen der App
-      werden alle in der App gespeicherten Daten entfernt.</p>
+    <p>Du kannst Packlisten, Ausrüstung, Touren, Tagebucheinträge, gespeicherte Wasserstellen, Kontakte, den Notfallpass und deine
+      Community-Beiträge jederzeit in der App löschen. Beim Löschen der App
+      werden alle in der App gespeicherten Daten entfernt. Community-Beiträge liegen nicht in der App, sondern in der gemeinsamen Datenbank, und bleiben deshalb erhalten, bis du sie löschst.</p>
   </section>
 
   <section>
     <h2>Deine Rechte</h2>
-    <p>Da ich keine Daten über dich verarbeite, liegen mir keine Daten vor, über die ich Auskunft geben, die ich berichtigen oder
-      löschen könnte. Bei Fragen zum Datenschutz kannst du mich trotzdem jederzeit per E-Mail erreichen. Du hast außerdem das Recht,
+    <p>Außer deinen Community-Beiträgen und Meldungen liegen mir keine Daten über dich vor. Du hast das Recht auf Auskunft,
+      Berichtigung, Löschung und Widerruf deiner Einwilligung; Community-Beiträge kannst du selbst ändern und löschen, für alles
+      andere schreib mir eine E-Mail. Du hast außerdem das Recht,
       dich bei einer Datenschutz-Aufsichtsbehörde zu beschweren.</p>
   </section>
 
