@@ -1,6 +1,7 @@
 # Baut die Website und die Wasserstellen-Kacheln und veröffentlicht beides auf GitHub Pages.
 # Läuft bei jeder Änderung an der Website, am ersten Montag im Monat (frische OSM-Daten) und auf Knopfdruck.
-# Bei einer reinen Website-Änderung werden die Kacheln der letzten Veröffentlichung übernommen.
+# Bei einer reinen Website-Änderung werden die Kacheln aus dem Actions-Cache übernommen (Neuladen der ~29 000 Kacheln
+# von GitHub Pages scheitert an dessen Ratenbegrenzung, HTTP 429). Fehlt der Cache, werden die Kacheln neu gebaut.
 name: Website und Wasserstellen
 
 on:
@@ -33,6 +34,19 @@ jobs:
       REBUILD: ${{ github.event_name == 'schedule' || inputs.water == true }}
     steps:
       - uses: actions/checkout@v4
+
+      - name: Kacheln aus dem Cache holen
+        id: tiles
+        if: env.REBUILD != 'true'
+        uses: actions/cache/restore@v4
+        with:
+          path: tiles
+          key: water-tiles-none
+          restore-keys: water-tiles-
+
+      - name: Ohne Cache neu bauen
+        if: env.REBUILD != 'true' && steps.tiles.outputs.cache-matched-key == ''
+        run: echo "REBUILD=true" >> "$GITHUB_ENV"
 
       - name: Werkzeuge installieren
         run: |
@@ -68,22 +82,20 @@ jobs:
           mkdir -p _site
           cp *.html style.css icon.png _site/
           if [ "$REBUILD" = "true" ]; then
-            python3 tools/build_water.py _site/data/water/v1 water.geojsonseq polys/*.poly
-          else
-            # Kacheln der letzten Veröffentlichung übernehmen (Liste in index.txt)
-            BASE=https://curlyrob.github.io/waldlaeufer/data/water/v1
-            mkdir -p _site/data/water/v1
-            if curl -fsS -o _site/data/water/v1/index.txt "$BASE/index.txt"; then
-              curl -fsS -o _site/data/water/v1/meta.json "$BASE/meta.json"
-              (cd _site/data/water/v1 && xargs -P 16 -I{} curl -fsS --retry 3 --create-dirs -o {} "$BASE/{}" < index.txt)
-            else
-              rmdir _site/data/water/v1
-            fi
+            rm -rf tiles
+            python3 tools/build_water.py tiles water.geojsonseq polys/*.poly
+            (cd tiles && find . -name '*.json' ! -name meta.json | sed 's|^\./||' | sort > index.txt)
           fi
-          if [ -d _site/data/water/v1 ]; then
-            (cd _site/data/water/v1 && find . -name '*.json' ! -name meta.json | sed 's|^\./||' | sort > index.txt)
-          fi
-          du -sh _site/data 2>/dev/null || true
+          mkdir -p _site/data/water
+          cp -R tiles _site/data/water/v1
+          du -sh _site/data
+
+      - name: Neue Kacheln im Cache ablegen
+        if: env.REBUILD == 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: tiles
+          key: water-tiles-${{ github.run_id }}
 
       - uses: actions/upload-pages-artifact@v3
         with:
