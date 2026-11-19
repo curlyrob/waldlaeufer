@@ -28,8 +28,9 @@
 
   <section>
     <h2>Kurz gesagt</h2>
-    <p>Alles, was du einträgst, bleibt auf deinem Gerät. Es gibt kein Benutzerkonto, keinen eigenen Server, keine Werbung,
-      kein Tracking und keine Analyse- oder Statistikdienste.</p>
+    <p>Alles, was du einträgst, bleibt auf deinem Gerät. Es gibt kein Benutzerkonto, keinen eigenen Server (außer einem kleinen
+      Vermittlungsdienst für die freiwillige Strava-Anmeldung, der nichts speichert), keine Werbung, kein Tracking und keine
+      Analyse- oder Statistikdienste.</p>
     <p>Ausnahme sind <strong>Community-Schlafplätze</strong>: Was du dort selbst teilst (Ort, Beschreibung, Foto, Bewertung, Spitzname),
       wird in einer öffentlichen iCloud-Datenbank gespeichert, die Waldläufer und die App Bikepacking gemeinsam nutzen, und ist für
       alle Nutzer beider Apps sichtbar.</p>
@@ -164,6 +165,23 @@
       selbst verlässt dein Gerät dabei nicht. Heruntergeladene Karten bleiben auf dem Gerät, bis du sie löschst. Rechtsgrundlage ist
       Art. 6 Abs. 1 lit. b DSGVO. Es gelten die <a href="https://openfreemap.org/privacy/">Datenschutzhinweise von OpenFreeMap</a>.
       Mit „Apple Karten“ lädt Apple die Karte; es gelten die Datenschutzbestimmungen von Apple.</p>
+    <h3>Strava (Pro, freiwillig)</h3>
+    <p>Unter <em>Mehr › Planen › Strava</em> kannst du die App mit deinem Strava-Konto verbinden. Bei der Anmeldung öffnet sich
+      die Seite von Strava (Strava, Inc., USA); dort erlaubst du der App, deine Aktivitäten zu lesen. Die App erhält dafür
+      Zugangsschlüssel, die nur im Schlüsselbund deines iPhones gespeichert werden – nicht in iCloud und nicht bei mir.</p>
+    <p>Die App ruft dann bei Strava die Liste deiner Aktivitäten ab (Name, Datum, Sportart, Strecke, Höhenmeter, Gehzeit) und
+      zeigt dir neue Wanderungen, Spaziergänge und Schneeschuhtouren an, die zu den von dir gewählten Kriterien passen. Erst wenn
+      du eine Wanderung übernimmst, lädt die App deren Streckenverlauf und speichert sie als Route mit Aufzeichnung auf deinem
+      Gerät (und, falls eingeschaltet, im iCloud-Abgleich). Nichts wird an Strava hochgeladen oder dort verändert. Rechtsgrundlage
+      ist deine Einwilligung (Art. 6 Abs. 1 lit. a DSGVO), die du jederzeit mit „Verbindung trennen“ in der App oder in deinen
+      Strava-Einstellungen unter „Meine Apps“ widerrufen kannst; übernommene Routen bleiben erhalten, bis du sie löschst. Es gelten
+      die <a href="https://www.strava.com/legal/privacy">Datenschutzerklärung von Strava</a>.</p>
+    <p>Für die Anmeldung braucht Strava ein geheimes Passwort der App, das nicht in der App selbst stehen soll. Deshalb läuft der
+      Tausch des Anmeldecodes gegen die Zugangsschlüssel über einen kleinen Vermittlungsdienst bei Cloudflare (Cloudflare, Inc.,
+      USA; zertifiziert nach dem EU-US Data Privacy Framework), den Waldläufer und die App Bikepacking gemeinsam nutzen. Dabei
+      werden der einmalige Anmeldecode bzw. der Erneuerungsschlüssel und technisch notwendig deine IP-Adresse übertragen und direkt
+      an Strava weitergereicht; der Dienst speichert nichts. Es gelten die
+      <a href="https://www.cloudflare.com/de-de/privacypolicy/">Datenschutzerklärung von Cloudflare</a>.</p>
     <h3>Ortung und Länderkennung: Apple bzw. Google</h3>
     <p>Um das Land für die Notrufnummer zu erkennen, nutzt die App den Ortungsdienst des Betriebssystems (Reverse-Geocoding).
       Auf dem iPhone wird die Position dabei an Apple übertragen, es gelten die
