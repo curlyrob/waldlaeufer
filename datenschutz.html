@@ -58,6 +58,8 @@
       <li>die zuletzt bekannte Position und das zuletzt erkannte Land, damit der Notruf-Bildschirm auch ohne GPS etwas anzeigt,</li>
       <li>die zuletzt geladene Wetterprognose,</li>
       <li>Routen aus GPX-Dateien, die du lädst, mit Tagesetappen, Schlafplätzen und Notizen sowie heruntergeladene Offline-Karten,</li>
+      <li>aufgezeichnete Touren: der mit GPS aufgezeichnete Weg mit Strecke, Gehzeit und Höhenmetern. Die Aufzeichnung läuft nur,
+        solange du sie gestartet hast, und wird nicht übertragen – außer in deinen eigenen iCloud-Abgleich, wenn du ihn eingeschaltet hast,</li>
       <li>mit Pro: Tagebucheinträge zu deinen Touren mit Text, Foto, Ort und Wetter sowie die gespeicherten Wasserstellen einer Tour.</li>
     </ul>
     <p>Die Daten werden nicht an mich übertragen. Auf dem iPhone sind sie Teil deines normalen iPhone-Backups, das von Apple bzw.
@@ -72,7 +74,8 @@
       bewerten. Waldläufer teilt sich diese Einträge mit der App <a href="https://curlyrob.github.io/bikepacking/">Bikepacking</a>
       desselben Entwicklers.</p>
     <h3>Ansehen</h3>
-    <p>Zum Anzeigen fragt die App die gemeinsame öffentliche CloudKit-Datenbank bei Apple ab – für den Umkreis deiner Position.
+    <p>Zum Anzeigen fragt die App die gemeinsame öffentliche CloudKit-Datenbank bei Apple ab – für den Umkreis deiner Position bzw.
+      des Kartenausschnitts, den du im Tab <em>Karte</em> ansiehst.
       Dafür brauchst du kein Konto; Apple verarbeitet dabei technisch notwendig deine IP-Adresse und die abgefragten Orte.</p>
     <h3>Eintragen und bewerten</h3>
     <p>Wenn du einen Schlafplatz oder eine Bewertung teilst, werden gespeichert und für alle Nutzer beider Apps sichtbar: Lage, Art,
@@ -105,7 +108,10 @@
     <h3>Standort (beim Verwenden der App)</h3>
     <p>Der Standort wird nur genutzt, solange du die App verwendest, und zwar für: Koordinaten und Land auf dem Notruf-Bildschirm,
       den Startpunkt und die letzte Position einer Tour, Sonnenauf- und -untergang, Wetter und Waldbrandgefahr, Wasserstellen in der
-      Nähe, den Ort eines Tagebucheintrags und geografisch Nord beim Kompass.
+      Nähe, den Ort eines Tagebucheintrags, geografisch Nord beim Kompass sowie die Karte mit Versorgung und Community-Schlafplätzen
+      rund um deine Position.
+      Während einer Aufzeichnung, die du selbst startest („Tour aufzeichnen“ oder „Wanderung starten“), läuft sie auch bei gesperrtem
+      Bildschirm weiter – iOS zeigt das mit dem blauen Standortsymbol an. Mit „Beenden“ endet die Aufzeichnung.
       Ohne Freigabe funktioniert die App weiter; diese Funktionen sind dann eingeschränkt.</p>
     <h3>Mitteilungen</h3>
     <p>Für die Rückmelde-Erinnerungen bei Touren und für Wartungstermine deiner Ausrüstung. Die Mitteilungen werden direkt auf
@@ -153,10 +159,12 @@
       (overpass-api.de, Deutschland, ersatzweise overpass.private.coffee, Österreich) für denselben Ausschnitt von etwa 28 × 17 km ab.
       Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO. Die Daten stammen von den OpenStreetMap-Mitwirkenden und stehen unter der
       Lizenz ODbL 1.0.</p>
-    <h3>Hütten und Campingplätze: GitHub Pages</h3>
-    <p>Für die Hütten und Campingplätze aus OpenStreetMap bei den Community-Schlafplätzen lädt die App vorbereitete Kartenausschnitte
-      der App Bikepacking von GitHub Pages (GitHub Inc., USA) – nur die Ausschnitte von etwa 28 × 17 km rund um den Kartenbereich, den
-      du ansiehst. Technisch notwendig verarbeitet GitHub dabei deine IP-Adresse. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO.
+    <h3>Hütten, Campingplätze und Versorgung: GitHub Pages</h3>
+    <p>Für die Hütten und Campingplätze aus OpenStreetMap bei den Community-Schlafplätzen sowie für „Versorgung unterwegs“ an einer
+      Route und auf der Karte (Wasser, Läden, Hütten, Campingplätze, Unterkünfte, Toiletten) lädt die App vorbereitete
+      Kartenausschnitte der App Bikepacking von GitHub Pages (GitHub Inc., USA) – nur die Ausschnitte von etwa 28 × 17 km entlang
+      der Route bzw. rund um den Kartenbereich, den du ansiehst. Außerhalb des abgedeckten Gebiets (Europa) fragt die App für eine
+      Route stattdessen die Overpass-Server von OpenStreetMap (siehe oben) für dieselben Ausschnitte ab. Technisch notwendig verarbeitet GitHub dabei deine IP-Adresse. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO.
       Die Daten stammen von den OpenStreetMap-Mitwirkenden (ODbL 1.0).</p>
     <h3>Routenkarten und Offline-Karten: OpenFreeMap</h3>
     <p>Wählst du bei einer Route die Karte „OpenFreeMap (offline)“, kommen die Kartendaten von OpenFreeMap (tiles.openfreemap.org,
